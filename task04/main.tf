@@ -95,8 +95,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
   size                  = var.vm_sku
-  admin_username        = var.vm_admin_username
-  network_interface_ids = [azurerm_network_interface.nic.id]
+  admin_username        = var.vm_admin_username              # Username provided in configuration
+  network_interface_ids = [azurerm_network_interface.nic.id] # NIC association
 
   os_disk {
     caching              = "ReadWrite"
@@ -104,21 +104,20 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   source_image_reference {
-    publisher = "canonical"
-    offer     = "ubuntu-24_04-lts"
-    sku       = "server"
+    publisher = "canonical"        # Correct capitalization
+    offer     = "ubuntu-24_04-lts" # Correct offer name
+    sku       = "server"           # Correct SKU for the image
     version   = "latest"
   }
 
-  disable_password_authentication = false
+  disable_password_authentication = false # Password Authentication Enabled
   tags                            = var.tags
 
-  # Provisioner to Install and Configure NGINX
   provisioner "remote-exec" {
     connection {
       host = azurerm_public_ip.pip.ip_address
       port = 22
-      user = var.vm_admin_username
+      user = var.vm_admin_username # Admin username passed in configuration
     }
 
     inline = var.nginx_install_command

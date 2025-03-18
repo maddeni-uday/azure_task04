@@ -1,4 +1,4 @@
-# General Configuration
+# Updated Settings
 location            = "East US"
 resource_group_name = "cmaz-93253787-mod4-rg"
 vnet_name           = "cmaz-93253787-mod4-vnet"
@@ -21,11 +21,9 @@ tags = {
   Creator = "maddeni_uday@epam.com"
 }
 
-# Network Security Rules
 allow_http = "AllowHTTP"
 allow_ssh  = "AllowSSH"
 
-# NGINX Installation Commands
 nginx_install_command = [
   "sudo apt-get update -y",
   "sudo apt-get install nginx -y",
