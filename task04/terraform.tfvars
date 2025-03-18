@@ -33,6 +33,7 @@ MIIBOgIBAAJBALD...your-private-key...
 -----END RSA PRIVATE KEY-----
 EOT
 
+
 # NGINX Installation
 nginx_install_command = [
   "sudo apt-get update -y",

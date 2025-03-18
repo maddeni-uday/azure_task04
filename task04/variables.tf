@@ -63,6 +63,13 @@ variable "vm_admin_username" {
   type        = string
 }
 
+# Define vm_password as a sensitive variable
+variable "vm_password" {
+  description = "Fallback admin password for the Virtual Machine (password authentication not in use)"
+  type        = string
+  sensitive   = true
+}
+
 variable "admin_ssh_key" {
   description = "Public SSH key to access the Virtual Machine"
   type        = string
