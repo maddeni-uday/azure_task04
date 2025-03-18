@@ -61,9 +61,9 @@ variable "vm_sku" {
 variable "vm_admin_username" {
   description = "Admin username for the Virtual Machine"
   type        = string
+  default     = "azureuser" # Optional default value for development (can be removed if terraform.tfvars provides this value).
 }
 
-# Define vm_password as a sensitive variable
 variable "vm_password" {
   description = "Fallback admin password for the Virtual Machine (password authentication not in use)"
   type        = string

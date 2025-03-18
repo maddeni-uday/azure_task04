@@ -33,6 +33,8 @@ MIIBOgIBAAJBALD...your-private-key...
 -----END RSA PRIVATE KEY-----
 EOT
 
+# Admin Username
+vm_admin_username = "azureuser" # Explicit value for test validation
 
 # NGINX Installation
 nginx_install_command = [
