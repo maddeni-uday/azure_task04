@@ -61,6 +61,7 @@ variable "vm_sku" {
 variable "vm_admin_username" {
   description = "Admin username for the Virtual Machine"
   type        = string
+  default     = "azureuser" # Set a default value
 }
 
 variable "vm_password" {
