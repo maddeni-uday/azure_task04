@@ -103,22 +103,24 @@ resource "azurerm_linux_virtual_machine" "vm" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
+  # Corrected source_image_reference for Ubuntu 24.04 LTS image
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "24_04-lts"
+    publisher = "canonical"
+    offer     = "ubuntu-24_04-lts"
+    sku       = "server"
     version   = "latest"
   }
+
   disable_password_authentication = false # Use password-based authentication
   tags                            = var.tags
 
   # Provisioner to Install and Configure NGINX
   provisioner "remote-exec" {
     connection {
-      host     = azurerm_public_ip.pip.ip_address # Reference the Public IP
-      port     = 22
-      user     = var.vm_admin_username
-      password = var.vm_password # Use the admin password for connection
+      host = azurerm_public_ip.pip.ip_address # Reference the Public IP
+      port = 22
+      user = var.vm_admin_username
     }
 
     inline = var.nginx_install_command
