@@ -1,6 +1,3 @@
-# Placeholder Password (Validation Requirement)
-vm_password = "PlaceholderPassword123!" # Dummy value for validation; actual password is provided externally.
-
 # General Configuration
 location            = "East US"
 resource_group_name = "cmaz-93253787-mod4-rg"

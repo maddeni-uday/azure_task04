@@ -90,13 +90,14 @@ resource "azurerm_network_interface_security_group_association" "nic_nsg" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
-# Virtual Machine
+# Virtual Machine Resource
 resource "azurerm_linux_virtual_machine" "vm" {
   name                  = var.vm_name
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
   size                  = var.vm_sku
   admin_username        = var.vm_admin_username              # Username provided in configuration
+  admin_password        = var.vm_password                    # Password passed externally (not hardcoded in terraform.tfvars)
   network_interface_ids = [azurerm_network_interface.nic.id] # NIC association
 
   os_disk {
@@ -121,7 +122,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
       host     = azurerm_public_ip.pip.ip_address
       port     = 22
       user     = var.vm_admin_username
-      password = "EXTERNAL_PASSWORD" # Password is passed externally (not from terraform.tfvars)
+      password = var.vm_password # Password dynamically supplied during execution
     }
 
     inline = var.nginx_install_command
