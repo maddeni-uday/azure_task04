@@ -8,6 +8,8 @@ public_ip_name      = "cmaz-93253787-mod4-pip"
 dns_name_label      = "cmaz-93253787-mod4-nginx"
 vm_name             = "cmaz-93253787-mod4-vm"
 vm_sku              = "Standard_F2s_v2"
+allow_http          = "AllowHTTP"
+allow_ssh           = "AllowSSH"
 
 tags = {
   Creator = "maddeni_uday@epam.com"

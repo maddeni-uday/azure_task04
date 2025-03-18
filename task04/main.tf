@@ -42,7 +42,7 @@ resource "azurerm_network_security_group" "nsg" {
 
 # NSG Rule for SSH
 resource "azurerm_network_security_rule" "allow_ssh" {
-  name                        = "AllowSSH"
+  name                        = var.allow_ssh
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
@@ -57,7 +57,7 @@ resource "azurerm_network_security_rule" "allow_ssh" {
 
 # NSG Rule for HTTP
 resource "azurerm_network_security_rule" "allow_http" {
-  name                        = "AllowHTTP"
+  name                        = var.allow_http
   priority                    = 101
   direction                   = "Inbound"
   access                      = "Allow"

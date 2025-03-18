@@ -54,7 +54,7 @@ variable "vm_admin_username" {
 }
 
 variable "vm_password" {
-  description = "Admin password for the Virtual Machine (sensitive)"
+  description = "Admin password for the Virtual Machine (required as sensitive)"
   type        = string
   sensitive   = true
 }
@@ -62,4 +62,14 @@ variable "vm_password" {
 variable "tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
+}
+
+variable "allow_http" {
+  description = "Rule name for AllowHTTP"
+  type        = string
+}
+
+variable "allow_ssh" {
+  description = "Rule name for AllowSSH"
+  type        = string
 }
