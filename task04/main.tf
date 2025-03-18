@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg" {
 # Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
-  address_space       = ["10.0.0.0/16"]
+  address_space       = var.address_space
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
@@ -19,7 +19,7 @@ resource "azurerm_subnet" "subnet" {
   name                 = var.subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.vnet_name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = var.address_prefixes
 }
 
 # Public IP
@@ -27,7 +27,7 @@ resource "azurerm_public_ip" "pip" {
   name                = var.public_ip_name
   resource_group_name = var.resource_group_name
   location            = var.location
-  allocation_method   = "Static"
+  allocation_method   = var.allocation_method
   domain_name_label   = var.dns_name_label
   tags                = var.tags
 }
@@ -76,7 +76,7 @@ resource "azurerm_network_interface" "nic" {
   resource_group_name = var.resource_group_name
   location            = var.location
   ip_configuration {
-    name                          = "internal"
+    name                          = var.nic_ip_configuration_name
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.pip.id
@@ -119,11 +119,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
       password = var.vm_password
     }
 
-    inline = [
-      "sudo apt-get update -y",
-      "sudo apt-get install nginx -y",
-      "sudo systemctl start nginx",
-      "sudo systemctl enable nginx"
-    ]
+    inline = var.nginx_install_command
   }
 }

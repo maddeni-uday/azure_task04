@@ -18,6 +18,16 @@ variable "subnet_name" {
   type        = string
 }
 
+variable "address_space" {
+  description = "Address space for the Virtual Network"
+  type        = list(string)
+}
+
+variable "address_prefixes" {
+  description = "Address prefixes for the Subnet"
+  type        = list(string)
+}
+
 variable "nsg_name" {
   description = "Name of the Network Security Group"
   type        = string
@@ -59,17 +69,32 @@ variable "vm_password" {
   sensitive   = true
 }
 
+variable "allocation_method" {
+  description = "Public IP allocation method"
+  type        = string
+}
+
+variable "nic_ip_configuration_name" {
+  description = "Name for the NIC IP configuration"
+  type        = string
+}
+
+variable "nginx_install_command" {
+  description = "Commands to install and configure NGINX"
+  type        = list(string)
+}
+
 variable "tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
 }
 
 variable "allow_http" {
-  description = "Rule name for AllowHTTP"
+  description = "Rule name for AllowHTTP NSG rule"
   type        = string
 }
 
 variable "allow_ssh" {
-  description = "Rule name for AllowSSH"
+  description = "Rule name for AllowSSH NSG rule"
   type        = string
 }
