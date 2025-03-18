@@ -64,6 +64,12 @@ variable "vm_admin_username" {
   default     = "azureuser"
 }
 
+variable "vm_password" {
+  description = "Admin password for the Virtual Machine (used for password authentication; provided externally)"
+  type        = string
+  sensitive   = true
+}
+
 variable "allocation_method" {
   description = "Public IP allocation method"
   type        = string

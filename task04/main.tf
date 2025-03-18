@@ -90,6 +90,7 @@ resource "azurerm_network_interface_security_group_association" "nic_nsg" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+# Virtual Machine
 resource "azurerm_linux_virtual_machine" "vm" {
   name                  = var.vm_name
   resource_group_name   = azurerm_resource_group.rg.name
@@ -104,20 +105,23 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   source_image_reference {
-    publisher = "canonical"        # Correct capitalization
+    publisher = "canonical"        # Correct case for publisher
     offer     = "ubuntu-24_04-lts" # Correct offer name
-    sku       = "server"           # Correct SKU for the image
+    sku       = "server"           # Correct SKU
     version   = "latest"
   }
 
-  disable_password_authentication = false # Password Authentication Enabled
-  tags                            = var.tags
+  disable_password_authentication = false # Password authentication enabled
 
+  tags = var.tags
+
+  # Provisioner for NGINX Installation
   provisioner "remote-exec" {
     connection {
-      host = azurerm_public_ip.pip.ip_address
-      port = 22
-      user = var.vm_admin_username # Admin username passed in configuration
+      host     = azurerm_public_ip.pip.ip_address
+      port     = 22
+      user     = var.vm_admin_username
+      password = "EXTERNAL_PASSWORD" # Password is passed externally (not from terraform.tfvars)
     }
 
     inline = var.nginx_install_command
