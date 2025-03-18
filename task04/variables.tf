@@ -61,13 +61,18 @@ variable "vm_sku" {
 variable "vm_admin_username" {
   description = "Admin username for the Virtual Machine"
   type        = string
-  default     = "azureuser" # Set a default value
+  default     = "azureuser"
 }
 
 variable "vm_password" {
   description = "Admin password for the Virtual Machine (required as sensitive)"
   type        = string
   sensitive   = true
+}
+
+variable "admin_ssh_key" {
+  description = "Public SSH key to access the Virtual Machine"
+  type        = string
 }
 
 variable "allocation_method" {

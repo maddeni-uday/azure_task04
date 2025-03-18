@@ -25,6 +25,9 @@ tags = {
 allow_http = "AllowHTTP"
 allow_ssh  = "AllowSSH"
 
+# SSH Key
+admin_ssh_key = "ssh-rsa AAAAB3...your-public-key..."
+
 # NGINX Installation
 nginx_install_command = [
   "sudo apt-get update -y",

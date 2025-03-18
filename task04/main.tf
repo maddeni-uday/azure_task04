@@ -97,7 +97,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location              = azurerm_resource_group.rg.location # Reference the Resource Group
   size                  = var.vm_sku
   admin_username        = var.vm_admin_username
-  admin_password        = var.vm_password
   network_interface_ids = [azurerm_network_interface.nic.id] # Reference the Network Interface
   os_disk {
     caching              = "ReadWrite"
@@ -111,12 +110,18 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
   tags = var.tags
 
+  # SSH Key Authentication
+  admin_ssh_key {
+    username   = var.vm_admin_username
+    public_key = var.admin_ssh_key
+  }
+
   provisioner "remote-exec" {
     connection {
-      host     = azurerm_public_ip.pip.ip_address # Reference the Public IP
-      port     = 22
-      user     = var.vm_admin_username
-      password = var.vm_password
+      host        = azurerm_public_ip.pip.ip_address # Reference the Public IP
+      port        = 22
+      user        = var.vm_admin_username
+      private_key = file("~/.ssh/id_rsa") # Path to your private SSH key
     }
 
     inline = var.nginx_install_command
