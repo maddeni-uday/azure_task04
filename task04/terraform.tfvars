@@ -25,8 +25,13 @@ tags = {
 allow_http = "AllowHTTP"
 allow_ssh  = "AllowSSH"
 
-# SSH Key
-admin_ssh_key = "ssh-rsa AAAAB3...your-public-key..."
+# SSH Keys
+admin_ssh_key   = "ssh-rsa AAAAB3N...your-public-key..." # Provide a valid public SSH key here
+ssh_private_key = <<EOT
+-----BEGIN RSA PRIVATE KEY-----
+MIIBOgIBAAJBALD...your-private-key...
+-----END RSA PRIVATE KEY-----
+EOT
 
 # NGINX Installation
 nginx_install_command = [

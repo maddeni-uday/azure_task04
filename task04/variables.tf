@@ -61,18 +61,17 @@ variable "vm_sku" {
 variable "vm_admin_username" {
   description = "Admin username for the Virtual Machine"
   type        = string
-  default     = "azureuser"
-}
-
-variable "vm_password" {
-  description = "Admin password for the Virtual Machine (required as sensitive)"
-  type        = string
-  sensitive   = true
 }
 
 variable "admin_ssh_key" {
   description = "Public SSH key to access the Virtual Machine"
   type        = string
+}
+
+variable "ssh_private_key" {
+  description = "Private SSH key used for provisioning the Virtual Machine"
+  type        = string
+  sensitive   = true
 }
 
 variable "allocation_method" {
@@ -86,7 +85,7 @@ variable "nic_ip_configuration_name" {
 }
 
 variable "nginx_install_command" {
-  description = "Commands to install and configure NGINX"
+  description = "List of commands to install and configure NGINX"
   type        = list(string)
 }
 
