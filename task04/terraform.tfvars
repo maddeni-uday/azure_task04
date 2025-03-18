@@ -25,18 +25,7 @@ tags = {
 allow_http = "AllowHTTP"
 allow_ssh  = "AllowSSH"
 
-# SSH Keys
-admin_ssh_key   = "ssh-rsa AAAAB3N...your-public-key..." # Provide a valid public SSH key here
-ssh_private_key = <<EOT
------BEGIN RSA PRIVATE KEY-----
-MIIBOgIBAAJBALD...your-private-key...
------END RSA PRIVATE KEY-----
-EOT
-
-# Admin Username
-vm_admin_username = "azureuser" # Explicit value for test validation
-
-# NGINX Installation
+# NGINX Installation Commands
 nginx_install_command = [
   "sudo apt-get update -y",
   "sudo apt-get install nginx -y",

@@ -61,22 +61,11 @@ variable "vm_sku" {
 variable "vm_admin_username" {
   description = "Admin username for the Virtual Machine"
   type        = string
-  default     = "azureuser" # Optional default value for development (can be removed if terraform.tfvars provides this value).
+  default     = "azureuser"
 }
 
 variable "vm_password" {
-  description = "Fallback admin password for the Virtual Machine (password authentication not in use)"
-  type        = string
-  sensitive   = true
-}
-
-variable "admin_ssh_key" {
-  description = "Public SSH key to access the Virtual Machine"
-  type        = string
-}
-
-variable "ssh_private_key" {
-  description = "Private SSH key used for provisioning the Virtual Machine"
+  description = "Admin password for the Virtual Machine (used when password authentication is enabled)"
   type        = string
   sensitive   = true
 }
@@ -92,7 +81,7 @@ variable "nic_ip_configuration_name" {
 }
 
 variable "nginx_install_command" {
-  description = "List of commands to install and configure NGINX"
+  description = "Commands to install and configure NGINX"
   type        = list(string)
 }
 
